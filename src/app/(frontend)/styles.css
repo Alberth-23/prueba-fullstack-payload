@@ -162,3 +162,538 @@ svg {
     }
   }
 }
+/* ====== Layout general ====== */
+
+.app-shell {
+  min-height: 100vh;
+  background: #f3f4f6;
+  color: #111827;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-shell__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: #111827;
+  color: #f9fafb;
+}
+
+.app-shell__logo-title {
+  font-weight: 700;
+}
+
+.app-shell__logo-subtitle {
+  display: block;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.app-shell__nav {
+  display: flex;
+  gap: 12px;
+}
+
+.app-shell__nav-link {
+  padding: 6px 10px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #e5e7eb;
+}
+
+.app-shell__nav-link--active {
+  background: #2563eb;
+  color: #f9fafb;
+}
+
+.app-shell__user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-shell__user-name {
+  font-size: 14px;
+}
+
+.app-shell__user-role {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.app-shell__logout {
+  border: 1px solid #4b5563;
+  background: transparent;
+  color: #e5e7eb;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.app-shell__logout:hover {
+  background: #374151;
+}
+
+.app-shell__main {
+  flex: 1;
+  padding: 24px;
+}
+
+/* ====== Páginas genéricas ====== */
+
+.page-container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 28px;
+  margin: 0 0 4px;
+}
+
+.page-subtitle {
+  margin-top: 0;
+  color: #6b7280;
+}
+
+.full-page-center {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* Spinner simple */
+.spinner {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 3px solid #e5e7eb;
+  border-top-color: #2563eb;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ====== Login ====== */
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0f172a;
+}
+
+.auth-card {
+  background: #111827;
+  color: #f9fafb;
+  padding: 24px 28px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 360px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.auth-card h1 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.auth-card__subtitle {
+  margin: 0 0 16px;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.auth-card__error {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.auth-form__field span {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.auth-form__field input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #4b5563;
+  background: #020617;
+  color: #f9fafb;
+}
+
+.auth-form__field input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.auth-form__submit {
+  margin-top: 8px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  background: #2563eb;
+  color: #f9fafb;
+  cursor: pointer;
+}
+
+.auth-form__submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.auth-card__hint {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* ====== Dashboard permisos ====== */
+
+.dashboard-section {
+  margin-top: 24px;
+}
+
+.dashboard-permissions {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.dashboard-permissions__card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 14px;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard-permissions__title {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+
+.dashboard-permissions__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+}
+
+.dashboard-permissions__list li {
+  margin-bottom: 4px;
+}
+
+.dashboard-permissions__list li.ok {
+  color: #16a34a;
+}
+
+.dashboard-permissions__list li.no {
+  color: #b91c1c;
+}
+
+/* ====== Unauthorized ====== */
+
+.unauth-card {
+  background: #111827;
+  color: #f9fafb;
+  padding: 24px 28px;
+  border-radius: 12px;
+  max-width: 360px;
+  text-align: center;
+}
+
+.unauth-card h1 {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.unauth-card__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.unauth-card__actions button {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.unauth-card__actions button.secondary {
+  background: #e5e7eb;
+  color: #111827;
+}
+/* ====== Inventario ====== */
+
+.inventario-toolbar {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.inventario-toolbar__search {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  max-width: 360px;
+}
+
+.inventario-toolbar__search input {
+  flex: 1;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+}
+
+.inventario-toolbar__search button {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background: #e5e7eb;
+  cursor: pointer;
+}
+
+button.primary {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: #e5e7eb;
+  color: #111827;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button.danger {
+  background: #b91c1c;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button.small {
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
+.inventario-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.inventario-table th,
+.inventario-table td {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 8px 10px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.inventario-table thead {
+  background: #f9fafb;
+}
+
+.inventario-table__actions {
+  display: flex;
+  gap: 4px;
+}
+
+/* Formularios inventario */
+
+.inventario-form {
+  margin-top: 16px;
+  background: white;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.inventario-form__row {
+  display: flex;
+  gap: 12px;
+}
+
+.inventario-form__row label {
+  flex: 1;
+}
+
+.inventario-form label span {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.inventario-form input,
+.inventario-form textarea {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+}
+
+.inventario-form__actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+/* Alerts, pagination, modal */
+
+.alert {
+  margin-top: 12px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.alert--error {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.alert--info {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.pagination {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.pagination__buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.pagination__buttons button {
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background: #f3f4f6;
+  cursor: pointer;
+}
+
+/* Modal simple */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+}
+
+.modal {
+  background: white;
+  padding: 16px 18px;
+  border-radius: 10px;
+  max-width: 360px;
+  width: 100%;
+}
+
+.modal h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+/* ====== Dashboard KPIs ====== */
+
+.dashboard-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.dashboard-kpi-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 12px 14px;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard-kpi-label {
+  margin: 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.dashboard-kpi-value {
+  margin: 4px 0 2px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.dashboard-kpi-value.warning {
+  color: #d97706; /* ámbar */
+}
+
+.dashboard-kpi-value.danger {
+  color: #b91c1c; /* rojo */
+}
+
+.dashboard-kpi-footnote {
+  margin: 0;
+  font-size: 11px;
+  color: #9ca3af;
+}

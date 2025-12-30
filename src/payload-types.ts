@@ -69,6 +69,10 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    permissions: Permission;
+    'inventory-items': InventoryItem;
+    ventas: Venta;
+    cobranzas: Cobranza;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +82,10 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    permissions: PermissionsSelect<false> | PermissionsSelect<true>;
+    'inventory-items': InventoryItemsSelect<false> | InventoryItemsSelect<true>;
+    ventas: VentasSelect<false> | VentasSelect<true>;
+    cobranzas: CobranzasSelect<false> | CobranzasSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -122,6 +130,8 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: string;
+  nombre: string;
+  role: 'admin' | 'user';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -160,6 +170,96 @@ export interface Media {
   focalY?: number | null;
 }
 /**
+ * Permisos por módulo para cada usuario
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "permissions".
+ */
+export interface Permission {
+  id: string;
+  user: string | User;
+  inventario?: {
+    canRead?: boolean | null;
+    canCreate?: boolean | null;
+    canUpdate?: boolean | null;
+    canDelete?: boolean | null;
+  };
+  ventas?: {
+    canRead?: boolean | null;
+    canCreate?: boolean | null;
+    canUpdate?: boolean | null;
+    canDelete?: boolean | null;
+  };
+  cobranzas?: {
+    canRead?: boolean | null;
+    canCreate?: boolean | null;
+    canUpdate?: boolean | null;
+    canDelete?: boolean | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Productos del inventario
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "inventory-items".
+ */
+export interface InventoryItem {
+  id: string;
+  nombre: string;
+  sku: string;
+  precio: number;
+  stock: number;
+  descripcion?: string | null;
+  /**
+   * URL de la imagen del producto (opcional)
+   */
+  imagen?: string | null;
+  activo?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Registro de ventas
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ventas".
+ */
+export interface Venta {
+  id: string;
+  fecha: string;
+  referencia: string;
+  cliente: string;
+  producto: string | InventoryItem;
+  cantidad: number;
+  /**
+   * Se calcula a partir del precio del producto x cantidad
+   */
+  total: number;
+  estado: 'pendiente' | 'pagada' | 'cancelada';
+  descripcion?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Registro de cobranzas
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cobranzas".
+ */
+export interface Cobranza {
+  id: string;
+  fechaVencimiento: string;
+  referencia: string;
+  cliente: string;
+  monto: number;
+  estado: 'pendiente' | 'pagada' | 'vencida';
+  descripcion?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -190,6 +290,22 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'permissions';
+        value: string | Permission;
+      } | null)
+    | ({
+        relationTo: 'inventory-items';
+        value: string | InventoryItem;
+      } | null)
+    | ({
+        relationTo: 'ventas';
+        value: string | Venta;
+      } | null)
+    | ({
+        relationTo: 'cobranzas';
+        value: string | Cobranza;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -238,6 +354,8 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  nombre?: T;
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -272,6 +390,84 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "permissions_select".
+ */
+export interface PermissionsSelect<T extends boolean = true> {
+  user?: T;
+  inventario?:
+    | T
+    | {
+        canRead?: T;
+        canCreate?: T;
+        canUpdate?: T;
+        canDelete?: T;
+      };
+  ventas?:
+    | T
+    | {
+        canRead?: T;
+        canCreate?: T;
+        canUpdate?: T;
+        canDelete?: T;
+      };
+  cobranzas?:
+    | T
+    | {
+        canRead?: T;
+        canCreate?: T;
+        canUpdate?: T;
+        canDelete?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "inventory-items_select".
+ */
+export interface InventoryItemsSelect<T extends boolean = true> {
+  nombre?: T;
+  sku?: T;
+  precio?: T;
+  stock?: T;
+  descripcion?: T;
+  imagen?: T;
+  activo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ventas_select".
+ */
+export interface VentasSelect<T extends boolean = true> {
+  fecha?: T;
+  referencia?: T;
+  cliente?: T;
+  producto?: T;
+  cantidad?: T;
+  total?: T;
+  estado?: T;
+  descripcion?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cobranzas_select".
+ */
+export interface CobranzasSelect<T extends boolean = true> {
+  fechaVencimiento?: T;
+  referencia?: T;
+  cliente?: T;
+  monto?: T;
+  estado?: T;
+  descripcion?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
